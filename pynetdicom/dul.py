@@ -452,7 +452,7 @@ class DULServiceProvider(Thread):
         pdu : pynetdicom.pdu.PDU
             The PDU to be encoded and sent to the peer.
         """
-        if self.socket is not None:
+        if self.socket is not None and self.socket.socket is not None:
             self.socket.send(pdu.encode())
             evt.trigger(self.assoc, evt.EVT_PDU_SENT, {"pdu": pdu})
         else:
